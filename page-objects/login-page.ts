@@ -25,8 +25,8 @@ export class LoginPage {
         await this.signInButton.click();
     }
 
-    async validateErrorMessage() {
-        await expect(this.errorMessageContainer).toHaveText("Epic sadface: Username and password do not match any user in this service");
+    async validateErrorMessage(message: string) {
+        await expect(this.errorMessageContainer).toHaveText(message);
     }
 }
 
