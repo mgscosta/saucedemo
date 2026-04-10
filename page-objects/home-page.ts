@@ -23,5 +23,8 @@ export class HomePage {
     async logout() {
         await this.logoutLink.click();
     }
-}
 
+    async validateUrl() {
+        expect(this.page).toHaveURL(/inventory.html/);
+    }
+}
