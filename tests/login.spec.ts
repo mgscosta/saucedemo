@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '/repos/saucedemo/page-objects/login-page';
 
 test('login successfully', async ({ page }) => {
-  await page.goto(process.env.APP_URL!);
-
-  await page.locator("#user-name").fill(process.env.APP_USERNAME!);
-  await page.locator("#password").fill(process.env.APP_PASSWORD!);
-
-  await page.locator("#login-button").click();
-
+  
+  const login = new LoginPage(page);
+  
+  await login.goto();
+  await login.performLogin(process.env.APP_USERNAME!, process.env.APP_PASSWORD! );
+  
   expect(page).toHaveURL(/inventory/);
 });
