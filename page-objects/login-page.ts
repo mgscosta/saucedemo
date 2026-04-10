@@ -5,12 +5,14 @@ export class LoginPage {
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
     readonly signInButton: Locator;
+    readonly errorMessageContainer: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.usernameInput = page.locator("#user-name");
         this.passwordInput = page.locator("#password");
-        this.signInButton = page.locator("#login-button")
+        this.signInButton = page.locator("#login-button");
+        this.errorMessageContainer = page.locator(".error-message-container.error");
     }
 
     async goto() {
@@ -21,6 +23,10 @@ export class LoginPage {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.signInButton.click();
+    }
+
+    async validateErrorMessage() {
+        await expect(this.errorMessageContainer).toHaveText("Epic sadface: Username and password do not match any user in this service");
     }
 }
 
