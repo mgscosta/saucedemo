@@ -1,8 +1,6 @@
 import { test } from '/repos/saucedemo/fixtures/login.fixtures';
 
-
 test.describe('login tests', () => {
-
   test('log in successfully', async ({ login, home }) => {
     await login.goto();
     await login.performLogin(process.env.APP_USERNAME!, process.env.APP_PASSWORD!);
