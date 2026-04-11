@@ -20,7 +20,6 @@ test.describe('login tests', () => {
   });
 
   test('log out successfuly', async ({ login, home }) => {
-
     await login.goto();
     await login.performLogin(process.env.APP_USERNAME!, process.env.APP_PASSWORD!);
 
@@ -29,7 +28,6 @@ test.describe('login tests', () => {
   });
 
   test('fail when tries to navigate to home without logging in', async ({ login, home }) => {
-
     await home.goto();
     await login.validateErrorMessage("Epic sadface: You can only access '/inventory.html' when you are logged in.");
   }); 
