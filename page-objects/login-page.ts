@@ -29,4 +29,3 @@ export class LoginPage {
         await expect(this.errorMessageContainer).toHaveText(message);
     }
 }
-
