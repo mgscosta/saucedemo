@@ -19,12 +19,13 @@ test.describe('login tests', () => {
     await login.validateErrorMessage("Epic sadface: Username and password do not match any user in this service");
   });
 
-  test('log out successfuly', async ({ login, products }) => {
+  test('log out successfuly', async ({ login, navbar, menu, products }) => {
     await login.goto();
     await login.performLogin(process.env.APP_USERNAME!, process.env.APP_PASSWORD!);
+    await products.validateUrl();
 
-    await products.clickOnMenu();
-    await products.logout();
+    await navbar.clickOnMenu();
+    await menu.logout();
   });
 
   test('fail when tries to navigate to products page without logging in', async ({ login, products }) => {
