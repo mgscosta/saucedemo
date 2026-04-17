@@ -1,23 +1,23 @@
 import { test as base } from '@playwright/test';
 import { LoginPage } from '../page-objects/login-page';
-import { HomePage } from '../page-objects/home-page';
+import { ProductsPage } from '../page-objects/products-page';
 
-type HomeFixtures = {
+type ProductsFixtures = {
     login: LoginPage;
-    home: HomePage;
+    products: ProductsPage;
 }
 
-export const test = base.extend<HomeFixtures>({
+export const test = base.extend<ProductsFixtures>({
     login: async ({ page }, use) => {
         const loginPage = new LoginPage(page);
         await loginPage.goto();
         await loginPage.performLogin(process.env.APP_USERNAME, process.env.APP_PASSWORD);
         await use(loginPage);
     },
-    home: async ({ page }, use) => {
-        const homePage = new HomePage(page);
-        await homePage.validateUrl();
-        await use(homePage);
+    products: async ({ page }, use) => {
+        const productsPage = new ProductsPage(page);
+        await productsPage.validateUrl();
+        await use(productsPage);
     }    
 });
 

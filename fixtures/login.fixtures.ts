@@ -1,10 +1,10 @@
 import { test as base } from '@playwright/test';
 import { LoginPage } from '../page-objects/login-page';
-import { HomePage } from '../page-objects/home-page';
+import { ProductsPage } from '../page-objects/products-page';
 
 type LoginFixtures = {
     login: LoginPage;
-    home: HomePage;
+    products: ProductsPage;
 }
 
 export const test = base.extend<LoginFixtures>({
@@ -12,9 +12,9 @@ export const test = base.extend<LoginFixtures>({
         const loginPage = new LoginPage(page);
         await use(loginPage);
     },
-    home: async ({ page }, use) => {
-        const homePage = new HomePage(page);
-        await use(homePage);
+    products: async ({ page }, use) => {
+        const productsPage = new ProductsPage(page);
+        await use(productsPage);
     }    
 });
 
