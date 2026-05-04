@@ -22,4 +22,8 @@ export class ProductsPage {
     async clickOnButtonByText(text: string) {
         await this.page.getByText(text).click();
     }
+
+    async removeItemFromCart(itemTestId: string) {
+        await this.page.getByTestId(itemTestId).click();
+    }
 }
