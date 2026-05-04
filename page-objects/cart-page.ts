@@ -11,8 +11,11 @@ export class CartPage {
         this.continueShoppingButton = this.page.locator("#continue-shopping");
     }
 
-    async clickOnCheckout()
-    {
+    async removeItemFromCart(itemTestId: string) {
+        await this.page.getByTestId(itemTestId).click();
+    }
+    
+    async clickOnCheckout() {
         await this.checkoutButton.click();
     }
 }

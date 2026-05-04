@@ -15,7 +15,7 @@ test.describe('shop tests', () => {
         await products.addItemToCart("add-to-cart-sauce-labs-backpack");
         await products.addItemToCart("add-to-cart-test.allthethings()-t-shirt-(red)");
         await navbar.goToCart();
-        await products.removeItemFromCart("remove-sauce-labs-backpack");
+        await cart.removeItemFromCart("remove-sauce-labs-backpack");
         await cart.clickOnCheckout();
         await checkout.fillInformationForm("John", "Doe", "12345-678");
         await checkout.clickOnContinue();
