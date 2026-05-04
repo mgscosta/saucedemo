@@ -1,4 +1,4 @@
-import { type Locator, type Page } from '@playwright/test';
+import {  expect, type Locator, type Page } from '@playwright/test';
 
 export class CheckoutPage {
     readonly page: Page;
@@ -9,6 +9,7 @@ export class CheckoutPage {
     readonly continueButton: Locator;
     readonly finishButton: Locator;
     readonly completeHeader: Locator;
+    readonly subTotalLabel: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,6 +20,7 @@ export class CheckoutPage {
         this.continueButton = this.page.locator("#continue");
         this.finishButton = this.page.locator("#finish");
         this.completeHeader = this.page.locator(".complete-header");
+        this.subTotalLabel = this.page.locator(".summary_subtotal_label");
     }
 
     async fillInformationForm(firstName: string, lastName: string, zipCode: string) {
@@ -27,18 +29,19 @@ export class CheckoutPage {
         await this.zipCodeInput.fill(zipCode);
     }
     
-    async clickOnCancel()
-    {
+    async clickOnCancel() {
         await this.cancelButton.click();
     }
 
-    async clickOnContinue()
-    {
+    async clickOnContinue() {
         await this.continueButton.click();
     }
 
-    async clickOnFinish()
-    {
+    async clickOnFinish() {
         await this.finishButton.click();
     } 
+
+    async validateSubTotal(text: string) {
+        await expect(this.subTotalLabel).toHaveText(`Item total: \$${text}`);
+    }
 }
