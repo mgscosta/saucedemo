@@ -20,15 +20,15 @@ export class ItemPage {
     }
 
     async validateItemName(name: string) {
-        expect(await this.name).toHaveText(name);        
+        await expect(this.name).toHaveText(name);        
     }
 
     async validateItemDescription(desc: string) {
-        expect(await this.description).toHaveText(desc);
+        await expect(this.description).toHaveText(desc);
     }
 
     async validateItemPrice(price: string) {
-        expect(await this.price).toHaveText(price);
+        await expect(this.price).toHaveText(price);
     }
 
     async addToCart() {
@@ -40,6 +40,6 @@ export class ItemPage {
     }
 
     async validateImageAlt(altText: string) {
-        expect(await this.image).toHaveAttribute("alt", altText);
+        await expect(this.image).toHaveAttribute("alt", altText);
     }
 }

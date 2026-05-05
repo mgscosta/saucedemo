@@ -22,15 +22,15 @@ export class Navbar {
     }
 
     async validateBadgeCount(count: string) {
-        expect(await this.shoppingCartBadge).toHaveText(count);
+        await expect(this.shoppingCartBadge).toHaveText(count);
     }
 
     async validateBadgeExistence(value: boolean) {
         if (value) {
-            expect(await this.shoppingCartBadge).toBeVisible();
+            await expect(this.shoppingCartBadge).toBeVisible();
         }
         else {
-            expect(await this.shoppingCartBadge).not.toBeAttached();
+            await expect(this.shoppingCartBadge).not.toBeAttached();
         }
     }
 }
