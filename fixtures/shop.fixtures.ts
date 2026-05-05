@@ -32,7 +32,7 @@ export const test = base.extend<ShopFixtures>({
         const menu = new Menu(page);
         await use(menu);
     },
-    products: async ({ page }, use) => {
+    products: async ({ page, login }, use) => {
         const productsPage = new ProductsPage(page);
         await productsPage.validateUrl();
         await use(productsPage);
