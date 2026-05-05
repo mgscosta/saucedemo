@@ -19,11 +19,11 @@ export class ProductsPage {
         await this.page.getByTestId(itemTestId).click();
     }
 
-    async clickOnButtonByText(text: string) {
-        await this.page.getByText(text).click();
-    }
-
     async removeItemFromCart(itemTestId: string) {
         await this.page.getByTestId(itemTestId).click();
+    }
+
+    async clickToViewItem(itemName: string) {
+        await this.page.getByText(itemName).click();
     }
 }

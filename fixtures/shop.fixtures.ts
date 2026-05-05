@@ -5,6 +5,7 @@ import { Menu } from '../page-objects/menu';
 import { Navbar } from '../page-objects/navbar';
 import { CheckoutPage } from '../page-objects/checkout-page';
 import { CartPage } from '../page-objects/cart-page';
+import { ItemPage } from '../page-objects/item-page';
 
 type ShopFixtures = {
     login: LoginPage;
@@ -13,6 +14,7 @@ type ShopFixtures = {
     products: ProductsPage;
     cart: CartPage;
     checkout: CheckoutPage;
+    item: ItemPage;
 }
 
 export const test = base.extend<ShopFixtures>({
@@ -35,13 +37,17 @@ export const test = base.extend<ShopFixtures>({
         await productsPage.validateUrl();
         await use(productsPage);
     },
-    cart: async ( { page }, use) => {
+    cart: async ({ page }, use) => {
         const cartPage = new CartPage(page);
         await use(cartPage);
     },
     checkout: async ({ page }, use) => {
         const checkoutPage = new CheckoutPage(page);
         await use(checkoutPage);
+    },
+    item: async ({ page }, use) => {
+        const itemPage = new ItemPage(page);
+        await use(itemPage);
     }
 });
 

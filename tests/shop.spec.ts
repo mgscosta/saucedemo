@@ -24,7 +24,7 @@ test.describe('shop tests', () => {
         await expect(checkout.completeHeader).toContainText("Thank you for your order!");
     });
 
-    test('validate cart badge count by adding and removing items', async ({ login, navbar, products, cart, checkout }) => {
+    test('validate cart badge count by adding and removing items', async ({ login, navbar, products }) => {
         await products.addItemToCart("add-to-cart-sauce-labs-backpack");
         await navbar.validateBadgeCount("1");
         await products.addItemToCart("add-to-cart-sauce-labs-bike-light");
@@ -50,5 +50,13 @@ test.describe('shop tests', () => {
         await navbar.validateBadgeCount("1");
         await products.removeItemFromCart("remove-test.allthethings()-t-shirt-(red)");
         await navbar.validateBadgeExistence(false);
+    });
+
+    test('validate item fields presence', async ({ login, navbar, products, cart, checkout, item }) => {
+        await products.clickToViewItem("Sauce Labs Backpack");
+        await item.validateItemName("Sauce Labs Backpack");
+        await item.validateItemDescription("carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.");
+        await item.validateItemPrice("$29.99");
+        await item.validateImageAlt("Sauce Labs Backpack");
     });
 });
