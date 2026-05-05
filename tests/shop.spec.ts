@@ -52,11 +52,20 @@ test.describe('shop tests', () => {
         await navbar.validateBadgeExistence(false);
     });
 
-    test('validate item fields presence', async ({ login, navbar, products, cart, checkout, item }) => {
+    test('validate item fields presence', async ({ login, products, item }) => {
         await products.clickToViewItem("Sauce Labs Backpack");
         await item.validateItemName("Sauce Labs Backpack");
         await item.validateItemDescription("carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.");
         await item.validateItemPrice("$29.99");
         await item.validateImageAlt("Sauce Labs Backpack");
+    });
+
+    test('view item and add it to cart then remove it', async ({ login, navbar, products, item }) => {
+        await products.clickToViewItem("Sauce Labs Backpack");
+        await item.addToCart();
+        await navbar.validateBadgeExistence(true);
+        await navbar.validateBadgeCount("1");
+        await item.removeFromCart();
+        await navbar.validateBadgeExistence(false);
     });
 });
