@@ -2,9 +2,11 @@ import { expect, type Locator, type Page } from '@playwright/test';
 
 export class ProductsPage {
     readonly page: Page;
+    readonly sortSelect : Locator;
 
     constructor(page: Page) {
         this.page = page;
+        this.sortSelect = this.page.getByTestId("product-sort-container");
     }
 
     async goto() {
