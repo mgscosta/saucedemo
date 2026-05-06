@@ -68,4 +68,14 @@ test.describe('shop tests', () => {
         await item.removeFromCart();
         await navbar.validateBadgeExistence(false);
     });
+
+    test('validate sorting A to Z', async ({ login, products }) => {
+        await products.sortByOption("za");
+        await products.sortByOption("az");
+        
+        let sortedValues : string[] = await products.obtainInventoryList();
+        let isSorted : boolean = await products.validateSort(sortedValues);
+
+        expect(isSorted).toBe(true);
+    });
 });
