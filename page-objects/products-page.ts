@@ -37,25 +37,27 @@ export class ProductsPage {
 
     async validateSortByName(values: Locator[]) {
         let namesArray: Locator[] = values.map(element => {
-            return element.getByTestId("inventory-item-name");;
+            return element.getByTestId("inventory-item-name");
         });
 
         let names: (string | null)[] = await Promise.all(namesArray.map(async element => {
             return await element.textContent();
         }));
 
-        let sortedValues = names.sort();
+        let copy: (string | null)[] = [...names];
+
+        let sortedValues = copy.sort();
 
         let isEqual: boolean;
 
         isEqual = sortedValues.length === values.length &&
             sortedValues.every((val, index) => val === names[index]);
 
-        return isEqual;
+        expect(isEqual).toBe(true);
     }
 
     async obtainInventoryList() {
-        let inventoryItemList : Locator [] = await this.inventoryItem.all();
+        let inventoryItemList: Locator[] = await this.inventoryItem.all();
 
         return inventoryItemList;
     }

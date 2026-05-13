@@ -76,8 +76,6 @@ test.describe('shop tests', () => {
         
         let inventoryList : Locator[] = await products.obtainInventoryList();
         
-        let isSorted : boolean = await products.validateSortByName(inventoryList);
-
-        expect(isSorted).toBe(true);
+        await products.validateSortByName(inventoryList);
     });
 });
