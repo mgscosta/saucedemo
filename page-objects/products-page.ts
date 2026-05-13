@@ -35,19 +35,27 @@ export class ProductsPage {
         await this.sortSelect.selectOption(option);
     }
 
-    async validateSort(values: string[]) {
-        let sortedValues: string[] = values.sort();
+    async validateSortByName(values: Locator[]) {
+        let namesArray: Locator[] = values.map(element => {
+            return element.getByTestId("inventory-item-name");;
+        });
+
+        let names: (string | null)[] = await Promise.all(namesArray.map(async element => {
+            return await element.textContent();
+        }));
+
+        let sortedValues = names.sort();
 
         let isEqual: boolean;
 
         isEqual = sortedValues.length === values.length &&
-            sortedValues.every((val, index) => val === values[index]);
+            sortedValues.every((val, index) => val === names[index]);
 
         return isEqual;
     }
 
     async obtainInventoryList() {
-        let inventoryItemList : string [] = await this.inventoryItem.allTextContents();
+        let inventoryItemList : Locator [] = await this.inventoryItem.all();
 
         return inventoryItemList;
     }

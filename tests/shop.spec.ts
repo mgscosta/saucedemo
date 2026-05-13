@@ -1,3 +1,4 @@
+import { Locator } from '@playwright/test';
 import { expect, test } from '/repos/saucedemo/fixtures/shop.fixtures';
 
 test.describe('shop tests', () => {
@@ -73,8 +74,9 @@ test.describe('shop tests', () => {
         await products.sortByOption("za");
         await products.sortByOption("az");
         
-        let sortedValues : string[] = await products.obtainInventoryList();
-        let isSorted : boolean = await products.validateSort(sortedValues);
+        let inventoryList : Locator[] = await products.obtainInventoryList();
+        
+        let isSorted : boolean = await products.validateSortByName(inventoryList);
 
         expect(isSorted).toBe(true);
     });
