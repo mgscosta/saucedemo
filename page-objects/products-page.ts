@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { SortingOrder } from '../enums/sorting-order';
 
 export class ProductsPage {
     readonly page: Page;
@@ -35,7 +36,7 @@ export class ProductsPage {
         await this.sortSelect.selectOption(option);
     }
 
-    async validateSortByName(values: Locator[]) {
+    async validateSortByName(values: Locator[], sortingOrder : SortingOrder ) {
         let namesArray: Locator[] = values.map(element => {
             return element.getByTestId("inventory-item-name");
         });
@@ -46,7 +47,17 @@ export class ProductsPage {
 
         let copy: (string | null)[] = [...names];
 
-        let sortedValues = copy.sort();
+
+        let sortedValues: (string | null)[];
+
+        switch (sortingOrder) {
+            case SortingOrder.Ascending:
+                sortedValues = copy.sort();
+                break;
+            case SortingOrder.Descending:
+                sortedValues = copy.sort((a, b) => b!.localeCompare(a!));
+                break;
+        }
 
         let isEqual: boolean;
 

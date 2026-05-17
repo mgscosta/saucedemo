@@ -1,5 +1,6 @@
 import { Locator } from '@playwright/test';
 import { expect, test } from '/repos/saucedemo/fixtures/shop.fixtures';
+import { SortingOrder } from '/repos/saucedemo/enums/sorting-order';
 
 test.describe('shop tests', () => {
     test('buy an item from the shop', async ({ login, navbar, products, cart, checkout}) => {
@@ -76,6 +77,14 @@ test.describe('shop tests', () => {
         
         let inventoryList : Locator[] = await products.obtainInventoryList();
         
-        await products.validateSortByName(inventoryList);
+        await products.validateSortByName(inventoryList, SortingOrder.Ascending);
+    });
+
+        test('validate sorting Z to A', async ({ login, products }) => {
+        await products.sortByOption("za");
+        
+        let inventoryList : Locator[] = await products.obtainInventoryList();
+        
+        await products.validateSortByName(inventoryList, SortingOrder.Descending);
     });
 });
