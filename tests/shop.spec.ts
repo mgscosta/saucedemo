@@ -3,7 +3,7 @@ import { expect, test } from '/repos/saucedemo/fixtures/shop.fixtures';
 import { SortingOrder } from '/repos/saucedemo/enums/sorting-order';
 
 test.describe('shop tests', () => {
-    test('buy an item from the shop', async ({ login, navbar, products, cart, checkout}) => {
+    test('buy an item from the shop', async ({ login, navbar, products, cart, checkout }) => {
         await products.addItemToCart("add-to-cart-sauce-labs-backpack");
         await navbar.goToCart();
         await cart.clickOnCheckout();
@@ -39,7 +39,7 @@ test.describe('shop tests', () => {
         await navbar.validateBadgeCount("5");
         await products.addItemToCart("add-to-cart-test.allthethings()-t-shirt-(red)");
         await navbar.validateBadgeCount("6");
-        
+
         await products.removeItemFromCart("remove-sauce-labs-backpack");
         await navbar.validateBadgeCount("5");
         await products.removeItemFromCart("remove-sauce-labs-bike-light");
@@ -74,17 +74,33 @@ test.describe('shop tests', () => {
     test('validate sorting A to Z', async ({ login, products }) => {
         await products.sortByOption("za");
         await products.sortByOption("az");
-        
-        let inventoryList : Locator[] = await products.obtainInventoryList();
-        
+
+        let inventoryList: Locator[] = await products.obtainInventoryList();
+
         await products.validateSortByName(inventoryList, SortingOrder.Ascending);
     });
 
-        test('validate sorting Z to A', async ({ login, products }) => {
+    test('validate sorting Z to A', async ({ login, products }) => {
         await products.sortByOption("za");
-        
-        let inventoryList : Locator[] = await products.obtainInventoryList();
-        
+
+        let inventoryList: Locator[] = await products.obtainInventoryList();
+
         await products.validateSortByName(inventoryList, SortingOrder.Descending);
+    });
+
+    test('validate sorting price lowest to highest', async ({ login, products }) => {
+        await products.sortByOption("lohi");
+
+        let inventoryList: Locator[] = await products.obtainInventoryList();
+
+        await products.validateSortByPrice(inventoryList, SortingOrder.Ascending);
+    });
+
+    test('validate sorting price highest to lowest', async ({ login, products }) => {
+        await products.sortByOption("hilo");
+
+        let inventoryList: Locator[] = await products.obtainInventoryList();
+
+        await products.validateSortByPrice(inventoryList, SortingOrder.Descending);
     });
 });
